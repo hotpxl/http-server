@@ -80,8 +80,7 @@ main = serverWith defaultConfig { srvLog = stdLogger, srvPort = 8888 }
 
 sendText       :: StatusCode -> String -> Response String
 sendText s v    = insertHeader HdrContentLength (show (length txt))
-                $ insertHeader HdrContentEncoding "UTF-8"
-                $ insertHeader HdrContentEncoding "text/plain"
+                $ insertHeader HdrContentType "text/plain; charset=utf-8"
                 $ (respond s :: Response String) { rspBody = txt }
   where txt       = encodeString v
 
